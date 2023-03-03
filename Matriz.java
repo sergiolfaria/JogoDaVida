@@ -28,12 +28,11 @@ public class Matriz {
 
     public void imprimirMatriz() {
         tamanhoMatriz();
-        Scanner teclado = new Scanner(System.in);
         for (int i = 0; i < matriz.length; i++) {
             for (int j = 0; j < matriz[0].length; j++) {
-                System.out.print("Digite o valor para a posição (" + i + ", " + j + "): ");
-                int valor = teclado.nextInt();
-                matriz[i][j] = valor;
+               GerarAleatorio valor = new GerarAleatorio();
+               int numeroAleatorio = valor.aleatorio();
+                matriz[i][j] = numeroAleatorio;
             }
         }
         for (int[] linha : matriz) {

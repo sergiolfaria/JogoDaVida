@@ -3,5 +3,6 @@ class Main {
    Matriz matriz = new Matriz();
         matriz.tamanhoMatriz();
         matriz.imprimirMatriz();
+        
   }
 }
