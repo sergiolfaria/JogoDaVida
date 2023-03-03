@@ -1,5 +1,5 @@
 class gerarAleatorio{
-   public static void main (String args[]){
+   public static void Aleatorio (String args[]){
       int min = 0;
       int max = 1;
       System.out.println(""+ min + " to " + max + ":");
