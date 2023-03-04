@@ -1,5 +1,5 @@
 import java.util.*;
-import java.util.Random;
+
 
 public class Matriz {
     private int[][] matriz;
@@ -25,7 +25,7 @@ public class Matriz {
             }
         }
     }
-
+      // gera o tamanho da matriz e a preenche.
     public void imprimirMatriz() {
         tamanhoMatriz();
         for (int i = 0; i < matriz.length; i++) {
