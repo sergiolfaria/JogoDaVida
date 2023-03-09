@@ -1,31 +1,14 @@
-import java.util.Random;
+class JogoVida {
+  private Matriz matriz;
+  private int tamanhoMatriz;
 
-public class JogoVida {
-    private int[][] matriz;
-    private int tamanhoMatriz;
-
-    public JogoVida(int tamanhoMatriz) {
-        this.tamanhoMatriz = tamanhoMatriz;
-        matriz = new int[tamanhoMatriz][tamanhoMatriz];
-        // Preenche a matriz com células vivas e mortas aleatoriamente
-        Random rand = new Random();
-        for (int i = 0; i < tamanhoMatriz; i++) {
-            for (int j = 0; j < tamanhoMatriz; j++) {
-                matriz[i][j] = rand.nextInt(2);
-            }
-        }
+  public void iniciarJogo() {
+        this.matriz = new Matriz();
+        matriz.instanciarMatriz();
+        
     }
 
-    public void imprimirMatriz() {
-        for (int i = 0; i < tamanhoMatriz; i++) {
-            for (int j = 0; j < tamanhoMatriz; j++) {
-                System.out.print(matriz[i][j] + " ");
-            }
-            System.out.println();
-        }
-    }
-
-    public void atualizarMatriz() {
+   public void atualizarMatriz(int tamanhoMatriz) {
         int[][] novaMatriz = new int[tamanhoMatriz][tamanhoMatriz];
 
         // Atualiza cada célula da nova matriz
@@ -64,8 +47,8 @@ public class JogoVida {
                 }
 
                 // Obtém as coordenadas do vizinho
-                int vizinhoLinha = (linha + i + tamanhoMatriz) % tamanhoMatriz;
-                int vizinhoColuna = (coluna + j + tamanhoMatriz) % tamanhoMatriz;
+                int vizinhoLinha = (linha + i + receberMatriz) % tamanhoMatriz;
+                int vizinhoColuna = (coluna + j + receberMatriz) % tamanhoMatriz;
 
                 // Incrementa o número de vizinhos vivos, se o vizinho estiver vivo
                 if (matriz[vizinhoLinha][vizinhoColuna] == 1) {

@@ -8,7 +8,7 @@ public class Matriz {
         matriz = new int[tamanhoDigitado][tamanhoDigitado];
     }
 
-    public void tamanhoMatriz() {
+    public void instanciarMatriz() {
         Scanner teclado = new Scanner(System.in);
         boolean validInput = false;
         // verifica se a resposta do usuário é um número, caso não seja o while repete,
@@ -20,14 +20,14 @@ public class Matriz {
                 int tamanhoDigitado = Integer.parseInt(input);
                 validInput = true;
                 criarMatriz(tamanhoDigitado);
+                popularMatriz();
             } catch (NumberFormatException e) {
                 System.out.println("A entrada não é um número inteiro válido. Tente novamente.");
             }
         }
     }
       // gera o tamanho da matriz e a preenche.
-    public void imprimirMatriz() {
-        tamanhoMatriz();
+    public void popularMatriz() {
         for (int i = 0; i < matriz.length; i++) {
             for (int j = 0; j < matriz[0].length; j++) {
                GerarAleatorio valor = new GerarAleatorio();
@@ -35,11 +35,14 @@ public class Matriz {
                 matriz[i][j] = numeroAleatorio;
             }
         }
+      }
+        public void imprimirMatriz(){
         for (int[] linha : matriz) {
             for (int coluna : linha) {
                 System.out.print(coluna + " ");
             }
             System.out.println();
         }
-    }
-}
+      }
+   }
+
