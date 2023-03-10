@@ -1,9 +1,8 @@
 
 class Main {
   public static void main(String[] args) {
-    JogoVida partida = new JogoVida();
+    JogoDaVida partida = new JogoDaVida();
     partida.iniciarJogo();
-    
 
   }
 }
