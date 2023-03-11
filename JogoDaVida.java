@@ -4,9 +4,10 @@ import java.util.*;
 class JogoDaVida {
    int tamanhoDigitado;
    int[][] matriz;
+   int opcao;
    
    
-//tamanho = lerTamanho();
+    //tamanho = lerTamanho();
    public void receberMatriz(){
       Scanner teclado = new Scanner(System.in);
       boolean validInput = false;
@@ -22,9 +23,9 @@ class JogoDaVida {
                 System.out.println("A entrada não é um número inteiro válido. Tente novamente.");
             }
         }
-     }
+    }
 
-//inicializarMatriz(tamanho);
+    //inicializarMatriz(tamanho);
    public void criarMatriz(int tamanhoDigitado) {
         matriz = new int[tamanhoDigitado][tamanhoDigitado];
    }
@@ -54,33 +55,75 @@ class JogoDaVida {
       criarMatriz(tamanhoDigitado);
       popularMatriz();
       imprimirMatriz();
-         }
-}
+      while(opcao != 2){
+          exibirMenu();
+          imprimirMatriz();
+      }
+     
+         
+    }
 
    public void exibirMenu(){
-      System.out.println("Deseja iniciar uma nova geração?");
+      System.out.println("Deseja iniciar uma nova geracao?");
       System.out.println("digite 1 para gerar a nova matriz, logo se desejar sair digite 2.");
       Scanner teclado = new Scanner(System.in);
-      teclado = opcao;
+      opcao = teclado.nextInt();
       boolean validInput = false;
-       while (!validInput) {
-       if(opcao == 1){
-          //calcularProximaGeracao();
-         //imprimirMatriz();
-
-         validInput = true;
-       }
-       else if(opcao == 2){
-        
-
-         validInput = true;
-       }
-       else{
-         validInput = false;
-       }
+      while (!validInput) {
+         if(opcao == 1){
+            calcularProximaGeracao();
+            
+            validInput = true;
+         }
+         else if(opcao == 2){
+            validInput = true;
+         }
+      else{
+            validInput = false;
+         }
       }
-   }
+   } 
+   public void calcularProximaGeracao() {
+       int[][] proximaGeracao = new int[tamanhoDigitado][tamanhoDigitado];
    
+       // percorre a matriz atual
+       for (int i = 0; i < tamanhoDigitado; i++) {
+           for (int j = 0; j < tamanhoDigitado; j++) {
+               // conta o número de vizinhos vivos
+               int vizinhosVivos = 0;
+               for (int k = i - 1; k <= i + 1; k++) {
+                   for (int l = j - 1; l <= j + 1; l++) {
+                       if (k >= 0 && k < tamanhoDigitado && l >= 0 && l < tamanhoDigitado) {
+                           if (k != i || l != j) { // não contar a célula atual
+                               vizinhosVivos += matriz[k][l];
+                           }
+                       }
+                   }
+               }
+   
+               // aplica as regras do jogo
+               if (matriz[i][j] == 1) { // célula viva
+                   if (vizinhosVivos < 2 || vizinhosVivos > 3) {
+                       proximaGeracao[i][j] = 0; // morre
+                   } else {
+                       proximaGeracao[i][j] = 1; // continua viva
+                   }
+               } else { // célula morta
+                   if (vizinhosVivos == 3) {
+                       proximaGeracao[i][j] = 1; // nasce
+                   } else {
+                       proximaGeracao[i][j] = 0; // continua morta
+                   }
+               }
+           }
+       }
+   
+       // atualiza a matriz para a próxima geração
+       matriz = proximaGeracao;
+   }
+
+
+}  
    
    
    
