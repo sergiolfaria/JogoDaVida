@@ -87,52 +87,54 @@ class JogoDaVida {
          }
       }
    } 
-   public void calcularProximaGeracao(){
-      int[][] proximaGeracao = new int[tamanhoDigitado][tamanhoDigitado];
-   
-      // Percorre a matriz atual
-      for (int i = 0; i < tamanhoDigitado; i++){
-         for (int j = 0; j < tamanhoDigitado; j++){
-         
-            // Conta o número de vizinhos vivos
-            int vizinhosVivos = 0;
-            
-            for (int k = i - 1; k <= i + 1; k++){
-               for (int l = j - 1; l <= j + 1; l++){
-                  
-                  if (k >= 0 && k < tamanhoDigitado && l >= 0 && l < tamanhoDigitado){
-                     if (k != i || l != j){                                                  // não contar a célula atual
-                        vizinhosVivos += matriz[k][l];
-                     }
-                  }
-               }
+   public void calcularProximaGeracao() {
+    int[][] proximaGeracao = new int[tamanhoDigitado][tamanhoDigitado];
+
+    for (int i = 0; i < tamanhoDigitado; i++) {
+        for (int j = 0; j < tamanhoDigitado; j++) {
+            int vizinhosVivos = contarVizinhosVivos(i, j);
+
+            if (matriz[i][j] == 1) { // célula viva
+                proximaGeracao[i][j] = aplicarRegrasCelulaViva(vizinhosVivos);
+            } else { // célula morta
+                proximaGeracao[i][j] = aplicarRegrasCelulaMorta(vizinhosVivos);
             }
-   
-            // Aplica as regras do jogo
-            if (matriz[i][j] == 1){                                                          // célula viva
-               
-               if (vizinhosVivos < 2 || vizinhosVivos > 3){
-                  proximaGeracao[i][j] = 0;                                                  // morre
-               }
-               else{
-                  proximaGeracao[i][j] = 1;                                                  // continua viva
-               }
-            } 
-            else{                                                                            // célula morta
-               
-               if (vizinhosVivos == 3){
-                  proximaGeracao[i][j] = 1;                                                  // nasce
-               }
-               else{
-                  proximaGeracao[i][j] = 0;                                                  // continua morta
-               }
+        }
+    }
+
+    // Atualiza a matriz para a próxima geração
+    matriz = proximaGeracao;
+}
+
+private int contarVizinhosVivos(int linha, int coluna) {
+    int vizinhosVivos = 0;
+
+    for (int i = linha - 1; i <= linha + 1; i++) {
+        for (int j = coluna - 1; j <= coluna + 1; j++) {
+            if (i >= 0 && i < tamanhoDigitado && j >= 0 && j < tamanhoDigitado && !(i == linha && j == coluna)) {
+                vizinhosVivos += matriz[i][j];
             }
-         }
-      }
-   
-      // Atualiza a matriz para a próxima geração
-      matriz = proximaGeracao;
-   }
+        }
+    }
+
+    return vizinhosVivos;
+}
+
+private int aplicarRegrasCelulaViva(int vizinhosVivos) {
+    if (vizinhosVivos < 2 || vizinhosVivos > 3) {
+        return 0; // morre
+    } else {
+        return 1; // sobrevive
+    }
+}
+
+private int aplicarRegrasCelulaMorta(int vizinhosVivos) {
+    if (vizinhosVivos == 3) {
+        return 1; // nasce
+    } else {
+        return 0; // permanece morta
+    }
+}
 }  
    
    
