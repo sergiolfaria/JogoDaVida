@@ -76,7 +76,7 @@ class JogoDaVida {
       while (!validInput){
          if(opcao == 1){
             
-            jogar();
+           CalcularNovaGeracao();
             
             validInput = true;
          }
@@ -88,17 +88,17 @@ class JogoDaVida {
          }
       }
    } 
-  public void jogar() {
+  public void CalcularNovaGeracao() {
     int[][] novaMatriz = new int[tamanhoDigitado][tamanhoDigitado];
     
     for (int i = 0; i < tamanhoDigitado; i++) {
         for (int j = 0; j < tamanhoDigitado; j++) {
-            int count = countAliveNeighbors(i, j);
+            int conta = contarVizinhosVivos(i, j);
             
             // Aplica as regras do jogo
-            if (matriz[i][j] == 1 && (count < 2 || count > 3)) {
+            if (matriz[i][j] == 1 && (conta < 2 || conta > 3)) {
                 novaMatriz[i][j] = 0; // A célula morre de solidão ou superpopulação
-            } else if (matriz[i][j] == 0 && count == 3) {
+            } else if (matriz[i][j] == 0 && conta == 3) {
                 novaMatriz[i][j] = 1; // A célula nasce por reprodução
             } else {
                 novaMatriz[i][j] = matriz[i][j]; // A célula continua no mesmo estado
@@ -109,8 +109,8 @@ class JogoDaVida {
     // Atualiza a matriz para a próxima geração
     matriz = novaMatriz;
 }
-private int countAliveNeighbors(int i, int j) {
-    int count = 0;
+private int contarVizinhosVivos(int i, int j) {
+    int conta = 0;
     
     // Percorre todas as células ao redor da célula em questão
     for (int x = -1; x <= 1; x++) {
@@ -121,15 +121,15 @@ private int countAliveNeighbors(int i, int j) {
             }
             
             // Incrementa o contador se a célula estiver viva
-            if (isAlive(i + x, j + y)) {
-                count++;
+            if (reviverVizinhos(i + x, j + y)) {
+                conta++;
             }
         }
     }
     
-    return count;
+    return conta;
 }
-private boolean isAlive(int i, int j) {
+private boolean reviverVizinhos(int i, int j) {
     // Verifica se a célula está dentro da matriz
     if (i < 0 || i >= tamanhoDigitado || j < 0 || j >= tamanhoDigitado) {
         return false;
