@@ -9,7 +9,7 @@ class JogoDaVida {
    int tamanhoMatriz;
     
    // recebe o valor digitado pelo usuário para o tamanho desejado da matriz
-   public void receberMatriz() {
+   private void receberMatriz() {
       Scanner teclado = new Scanner(System.in);
       boolean validInput = false;
        
@@ -30,12 +30,12 @@ class JogoDaVida {
    }
 
    // inicializa a matriz criando ela com a dimensão escolhida pelo usuário 
-   public void criarMatriz(int tamanhoMatriz) {
+   private void criarMatriz(int tamanhoMatriz) {
       matriz = new int[tamanhoMatriz][tamanhoMatriz];
    }
      
    // popula a matriz com valores gerados aleatoriamente, sendo eles 0 ou 1
-   public void popularMatriz() {
+   private void popularMatriz() {
       for (int i = 0; i < tamanhoMatriz; i++) {
          for (int j = 0; j < tamanhoMatriz; j++) {
             GerarAleatorio valor = new GerarAleatorio();
@@ -46,7 +46,7 @@ class JogoDaVida {
    }
    
    // imprime a matriz 
-   public void imprimirMatriz(){
+   private void imprimirMatriz(){
       System.out.println();
       for (int[] linha : matriz){
          for (int coluna : linha){
@@ -57,7 +57,7 @@ class JogoDaVida {
    }
    
    // imprime a nova matriz 
-   public void imprimirNovaMatriz(){
+   private void imprimirNovaMatriz(){
       System.out.println();
       for (int[] linhaNova : novaMatriz){
          for (int colunaNova : linhaNova){
@@ -132,31 +132,31 @@ class JogoDaVida {
       int vivos = 0;
       // Verificar vizinhos acima e abaixo
       for (int i = linha - 1; i <= linha + 1; i += 2) {
-         int linhaVerif = i;
-         int colunaVerif = coluna;
+         int verificarLinha = i;
+         int verificarColuna = coluna;
          
-         if (linhaVerif < 0){
-            linhaVerif = tamanhoMatriz - 1;
+         if (verificarLinha < 0){
+            verificarLinha = tamanhoMatriz - 1;
          } 
-         else if (linhaVerif >= tamanhoMatriz){
-            linhaVerif = 0;
+         else if (verificarLinha >= tamanhoMatriz){
+            verificarLinha = 0;
          }
-         if (matriz[linhaVerif][colunaVerif] == 1){
+         if (matriz[verificarLinha][verificarColuna] == 1){
             vivos++;
          }
       }
       
       // Verificar vizinhos à esquerda e à direita
       for (int j = coluna - 1; j <= coluna + 1; j += 2){
-         int linhaVerif = linha;
-         int colunaVerif = j;
-         if (colunaVerif < 0){
-            colunaVerif = tamanhoMatriz - 1;
+         int verificarLinha = linha;
+         int verificarColuna = j;
+         if (verificarColuna < 0){
+            verificarColuna = tamanhoMatriz - 1;
          }
-         else if (colunaVerif >= tamanhoMatriz){
-            colunaVerif = 0;
+         else if (verificarColuna >= tamanhoMatriz){
+            verificarColuna = 0;
          }
-         if (matriz[linhaVerif][colunaVerif] == 1){
+         if (matriz[verificarLinha][verificarColuna] == 1){
             vivos++;
          }
       }
