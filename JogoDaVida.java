@@ -60,6 +60,7 @@ class JogoDaVida {
             System.out.print(coluna1 + " ");
          }
          System.out.println();
+         matriz = novaMatriz;
       }
    }
 
