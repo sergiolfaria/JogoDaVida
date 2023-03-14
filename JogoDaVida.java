@@ -103,9 +103,7 @@ public void calcularNovaGeracao() {
                 novaMatriz[i][j] = 0; // morre por superpopulação
             } else if (matriz[i][j] == 0 && vizinhosVivos == 3) {
                 novaMatriz[i][j] = 1; // nasce por reprodução
-            } else {
-                novaMatriz[i][j] = matriz[i][j]; // permanece igual
-            }
+            } 
             System.out.printf("(%d,%d) vizinhos vivos: %d\n", i, j, vizinhosVivos);
         }
     }
@@ -115,20 +113,32 @@ public void calcularNovaGeracao() {
 
 // conta quantos vizinhos vivos a célula tem
 public int contarVizinhos(int linha, int coluna) {
-   int total = 0;
    int vivos = 0;
-   for (int i = linha - 1; i <= linha + 1; i++) {
-      for (int j = coluna - 1; j <= coluna + 1; j++) {
-         if (i >= 0 && i < tamanhoDigitado && j >= 0 && j < tamanhoDigitado && !(i == linha && j == coluna)) {
-            total++;
-            if (matriz[i][j] == 1) {
-               vivos++;
-            }
-         }    
+   // Verificar vizinhos acima e abaixo
+   for (int i = linha - 1; i <= linha + 1; i += 2) {
+      int linhaVerif = i;
+      int colunaVerif = coluna;
+      if (linhaVerif < 0) {
+         linhaVerif = tamanhoDigitado - 1;
+      } else if (linhaVerif >= tamanhoDigitado) {
+         linhaVerif = 0;
+      }
+      if (matriz[linhaVerif][colunaVerif] == 1) {
+         vivos++;
       }
    }
-   if (total != 4) {
-      // Tratar erro aqui, como lançar uma exceção
+   // Verificar vizinhos à esquerda e à direita
+   for (int j = coluna - 1; j <= coluna + 1; j += 2) {
+      int linhaVerif = linha;
+      int colunaVerif = j;
+      if (colunaVerif < 0) {
+         colunaVerif = tamanhoDigitado - 1;
+      } else if (colunaVerif >= tamanhoDigitado) {
+         colunaVerif = 0;
+      }
+      if (matriz[linhaVerif][colunaVerif] == 1) {
+         vivos++;
+      }
    }
    return vivos;
 }
