@@ -175,7 +175,6 @@ class JogoDaVida {
       }
       return vivos;
    }
-// classe auxiliar para gerar valores aleatórios para a matriz
 }
 
 
