@@ -10,10 +10,15 @@ class JogoDaVida {
     
    // recebe o valor digitado pelo usuário para o tamanho desejado da matriz
    private void receberMatriz() {
-      Scanner teclado = new Scanner(System.in);
-      boolean validInput = false;
+      validarRespostaUsuario();
        
       // verificar se a resposta do usuário é um número, caso contrário, o while repete até receber um número
+      
+   }
+   
+   private void validarRespostaUsuario(){
+      Scanner teclado = new Scanner(System.in);
+      boolean validInput = false;
       while (!validInput){
          System.out.println("Digite o tamanho desejado para a matriz: ");
          String input = teclado.nextLine();
@@ -83,14 +88,14 @@ class JogoDaVida {
    }
    
    // Avisa ao usuario que ele encerrou o jogo.
-   public void encerrarJogo(){
+   private void encerrarJogo(){
       if (opcao == 2){
          System.out.println("\nVoce encerrou o jogo!");
       }
    }
 
    // exibe o menu do jogo 
-   public void exibirMenu(){
+   private void exibirMenu(){
       System.out.println("\nDeseja iniciar uma nova geracao?");
       System.out.println("[1] Iniciar nova geracao\n[2] Sair do jogo\n\n");
       Scanner teclado = new Scanner(System.in);
@@ -101,8 +106,8 @@ class JogoDaVida {
    // realiza o cálculo para gerar uma nova geração da matriz 
   
 
-// conta quantos vizinhos vivos a célula tem
-   public void calcularNovaGeracao(){
+   // conta quantos vizinhos vivos a célula tem
+   private void calcularNovaGeracao(){
       novaMatriz = new int[tamanhoMatriz][tamanhoMatriz];
 
       for (int i = 0; i < tamanhoMatriz; i++){
@@ -128,7 +133,7 @@ class JogoDaVida {
    }
 
    // conta quantos vizinhos vivos a célula tem
-   public int contarVizinhos(int linha, int coluna){
+   private int contarVizinhos(int linha, int coluna){
       int vivos = 0;
       // Verificar vizinhos acima e abaixo
       for (int i = linha - 1; i <= linha + 1; i += 2) {
