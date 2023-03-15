@@ -90,7 +90,7 @@ class JogoDaVida {
    // Avisa ao usuario que ele encerrou o jogo.
    private void encerrarJogo(){
       if (opcao == 2){
-         System.out.println("\nVoce encerrou o jogo!");
+         System.out.println("\nVoce encerrou o jogo! acima está sua ultima geracao");
       }
    }
 
@@ -135,7 +135,6 @@ class JogoDaVida {
             else if (matriz[i][j] == 0 && vizinhosVivos == 3){
                novaMatriz[i][j] = 1; // nasce por reprodução
             } 
-            System.out.printf("(%d,%d) vizinhos vivos: %d\n", i, j, vizinhosVivos);
          }
       }
       imprimirNovaMatriz();
