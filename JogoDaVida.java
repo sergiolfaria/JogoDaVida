@@ -95,13 +95,22 @@ class JogoDaVida {
    }
 
    // exibe o menu do jogo 
-   private void exibirMenu(){
-      System.out.println("\nDeseja iniciar uma nova geracao?");
-      System.out.println("[1] Iniciar nova geracao\n[2] Sair do jogo\n\n");
-      Scanner teclado = new Scanner(System.in);
-      opcao = teclado.nextInt();
-      calcularNovaGeracao();  
-   }  
+  public void exibirMenu() {
+    System.out.println("Deseja iniciar uma nova geracao?");
+    System.out.println("[1] Iniciar nova geração\n[2] Sair do jogo\n\n");
+
+    Scanner teclado = new Scanner(System.in);
+    try {
+        opcao = teclado.nextInt();
+    } catch (InputMismatchException e) {
+        System.out.println("Entrada invalida. Por favor, insira um numero valido.");
+        exibirMenu(); // chama o método novamente para exibir o menu novamente
+        return;
+    }
+
+    calcularNovaGeracao();
+}
+ 
    
    // realiza o cálculo para gerar uma nova geração da matriz 
   
